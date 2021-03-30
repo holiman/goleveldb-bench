@@ -63,7 +63,7 @@ func (env *WriteEnv) Run(write func(key, value string, lastCall bool) error) err
 	for {
 		env.rand.Read(env.key)
 		env.rand.Read(env.value)
-		written += env.cfg.DataSize
+		written += env.cfg.DataSize + env.cfg.KeySize
 		end := written >= env.cfg.Size
 		err := write(string(env.key), string(env.value), end)
 		if err != nil || end {
